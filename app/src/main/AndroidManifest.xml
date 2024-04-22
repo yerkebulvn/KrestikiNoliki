@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="myproject.tictactoegames">
+    package="com.myproject.krestiknolik">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="myproject.tictactoegames.SplashActivity"
+        <activity android:name="com.myproject.krestiknolik.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,24 +27,24 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
 
-        <activity android:name="myproject.tictactoegames.SettingsActivity"
+        <activity android:name="com.myproject.krestiknolik.SettingsActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name="myproject.tictactoegames.TwoNameActivity"
+        <activity android:name="com.myproject.krestiknolik.TwoNameActivity"
             android:windowSoftInputMode="adjustResize"
 
             >   </activity>
-        <activity android:name="myproject.tictactoegames.NameActivity"
+        <activity android:name="com.myproject.krestiknolik.NameActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="myproject.tictactoegames.MainActivity"
+        <activity android:name="com.myproject.krestiknolik.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="myproject.tictactoegames.ChooseActivity"
+        <activity android:name="com.myproject.krestiknolik.ChooseActivity"
             android:screenOrientation="portrait"
             >
         </activity>
-        <activity android:name="myproject.tictactoegames.SceneActivity"
+        <activity android:name="com.myproject.krestiknolik.SceneActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>
