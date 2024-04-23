@@ -23,6 +23,13 @@ public class NameActivity extends AppCompatActivity {
     public boolean selectedsingleplayer = true;
     private EditText nameAi;
 
+    /* OnCreate әдісі әрекет алғаш жасалған кезде шақырылады.
+        Ол келесі тапсырмаларды орындайды:
+        Мазмұн көрінісін activity_name ішінде анықталған орналасуға орнатады.xml.
+        UI элементтерін (EditText) олардың Идентификаторларын пайдаланып табу арқылы инициализациялайды.
+        Енгізілген мәтіндегі өзгерістерді бақылау үшін Ai EditText атауына мәтін бақылаушысын орнатады.
+        Ойыншы атауларына және бір ойыншы режиміне қатысты айнымалыларды инициализациялайды.
+        Терезені толық экран режимінде жұмыс істейтін етіп орнатады.*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,11 @@ public class NameActivity extends AppCompatActivity {
             }
         });
 
+        /* nameAI енгізілген мәтіннің ұзындығын бақылау үшін екі таймер қолданылады.
+            Бірінші таймер length айнымалысын ағымдағы мәтін ұзындығымен жаңартады.
+            Екінші таймер ұзындықтың 1-ден үлкен екенін тексереді (жарамды атауды көрсете отырып).
+            Жарамды болса, ол "Келесі" (ds) түймесі үшін басу тыңдаушысын орнатады.
+            Түйме басылғанда, Ол Таңдау Әрекетін бастайды және ойыншы атаулары мен бір ойыншы режимі туралы ақпаратты жібереді. */
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -87,6 +99,8 @@ public class NameActivity extends AppCompatActivity {
 
 
     }
+
+    /* Артқа түймесі басылғанда, onBackPressed әдісі MainActivity қайта оралады.*/
 
     @Override
     public void onBackPressed() {

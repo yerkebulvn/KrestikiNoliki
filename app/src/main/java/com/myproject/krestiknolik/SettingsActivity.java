@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity { //  Вибрация мен қиындық деңгейіне байланысты артықшылықтарды өңдейді.
 
     public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
 
@@ -34,16 +34,27 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Код Діріл параметрін ортақ теңшелімдерден алады.
+        // Терезе жалаулары қолданбаны толық экран режимінде іске қосу үшін орнатылған.
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         Vibration = preferences.getBoolean(PREF_VIBRATION, true);
 
         setContentView(R.layout.activity_settings);
-        Window w = getWindow(); // in Activity's onCreate() for instance
+        Window w = getWindow();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         final Intent intent = getIntent();
 
+        /* Switch (swit) вибрацияны қосу/өшіру үшін қолданылады.
+            TextView (diff) ағымдағы қиындық деңгейінің белгісін көрсетеді.
+            RelativeLayout (r3) қиындықты таңдау үшін қолданылады.
+            ImageView (артқа) артқа жылжу үшін пайдаланылады.*/
+
         Switch swit = findViewById(R.id.swith2);
         swit.setChecked(Vibration);
+
+        /* swit басылғанда, вибрация параметрін ауыстырады.
+            Белгіленген жалауша коммутатор күйіне байланысты жаңартылады.
+            Артықшылық SharedPreferences көмегімен сақталады.*/
         swit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +117,19 @@ public class SettingsActivity extends AppCompatActivity {
                 selected = 4;
                 break;
         }
+
+        /* Қиындықты Таңдау Үшін AlertDialog жасаңыз:
+            AlertDialog.Builder Ескерту диалогын құратын құрастырушы.
+            Диалогтың тақырыбы " Қиындықты Таңдау.”
+            Диалогтың екі түймесі бар:
+            Оң Батырма ("Керемет"):
+            Басқан кезде ол dif TextView ағымдағы қиындық белгісімен жаңартады (теңшелімдерден алынған).
+            Диалог тоқтатылды.
+            Теріс Батырма ("Болдырмау"):
+            Басқан кезде диалог тоқтатылады.
+            Диалог терезесінде сонымен қатар таңдау массивіне негізделген бір таңдау элементтері (қиындық деңгейінің параметрлері) көрсетіледі.
+            Бастапқыда таңдалған қиындық таңдалған айнымалымен анықталады (сақталған артықшылық мәні негізінде).
+            Қиындық деңгейі басылғанда, артықшылық мәні сәйкесінше жаңартылады.*/
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(getApplicationContext().getResources().getString(R.string.st_difficulty))

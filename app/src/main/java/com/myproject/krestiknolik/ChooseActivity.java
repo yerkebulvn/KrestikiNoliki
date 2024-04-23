@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/*ChooseActivity class AppCompatActivity кеңейтеді және
+ойыншылар өз жағын (X немесе O) таңдайтын әрекетті білдіреді.*/
+
 public class ChooseActivity extends AppCompatActivity {
 
     CharSequence player1 = "Player 1";
@@ -27,6 +30,16 @@ public class ChooseActivity extends AppCompatActivity {
     private ImageView squareImage, triangleImage, oImage, xImage, starImage, polyImage;
     private TextView label;
     private Timer timer;
+
+    /*OnCreate әдісі әрекет алғаш жасалған кезде шақырылады.
+    Ол келесі тапсырмаларды орындайды:
+    Мазмұн көрінісін activity_choose ішінде анықталған орналасуға орнатады.
+    UI элементтерін (ImageViews, TextViews) олардың Идентификаторларын пайдаланып табу арқылы инициализациялайды.
+    Жиындар пішін кескіндері (полиимаж, кескін және т.б.) үшін "тыңдаушылар" түймесін басыңыз.).
+    Пайдаланушы шертулері негізінде пішінді (X немесе O) таңдауды өңдейді.
+    Ниеттен ойыншылардың аттарын және бір ойыншы режимі туралы ақпаратты алады.
+    Пішінді таңдауға байланысты айнымалыларды инициализациялайды.
+    Терезені толық экран режимінде жұмыс істейтін етіп орнатады.*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +63,12 @@ public class ChooseActivity extends AppCompatActivity {
             label.setText(getApplicationContext().getResources().getString(R.string.pick_your_side));
         }
 
+        /*Код КЕЛЕСІ UI элементтерін инициализациялайды:
+        жапсырма: пайдаланушыға нұсқауларды көрсететін Мәтіндік Көрініс.
+        Кескін кескіндері (image, poly Image, x Image, star Image, triangle Image, square Image):
+        әртүрлі пішіндерді бейнелейтін Кескін Көріністері.
+        Бастапқы түсті сүзгілер кескін кескіндеріне қолданылады.*/
+
         oImage = findViewById(R.id.o_image);
         polyImage = findViewById(R.id.poly_image);
         xImage = findViewById(R.id.x_image);
@@ -63,6 +82,13 @@ public class ChooseActivity extends AppCompatActivity {
         xImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.tint2));
         triangleImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.tint2));
         squareImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.tint2));
+
+        /*Әрбір кескін кескіні (poly Image, image,  т.б.) шертетін тыңдаушысы бар.
+            Кескін кескіні басылған кезде:
+            isSelected true
+            Player 1 ax жалаушасы пайдаланушының X немесе O таңдағанына байланысты орнатылады.
+            Пішін айнымалысы таңдалған пішінге орнатылады (мысалы, "poly").
+            Таңдалған пішінді көрсету үшін түсті сүзгілер қолданылады.*/
 
         polyImage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,6 +14,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "vibration";
     private static final String PREF_VIBRATION = "TicVib";
 
+    /*OnCreate әдісі әрекет алғаш жасалған кезде шақырылады.
+    Ол келесі тапсырмаларды орындайды:
+    Мазмұн көрінісін activity_main ішінде анықталған орналасуға орнатады.
+    ПАЙДАЛАНУШЫ ИНТЕРФЕЙСІНІҢ элементтерін (CardViews) олардың Идентификаторларын пайдаланып табу арқылы инициализациялайды.
+    Жиындар Ai, FM Және параметрлер Карталарын Көру үшін "тыңдаушылар" түймесін басыңыз.
+    GetWindow ().setFlags(...) line қолданбаның толық экран режимінде жұмыс істеуін қамтамасыз етеді.*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         CardView Ai = findViewById(R.id.ai_mode);
         CardView FM = findViewById(R.id.friends_mode);
+
+        /*Ai CardView:
+            Басқан кезде Ол Атау Әрекетін бастайды.
+        FM CardView:
+            Басқан кезде Ол Екі Атау Әрекетін бастайды.
+        параметрлер CardView:
+            Басқан кезде Ол Параметрлер Әрекетін бастайды.*/
 
         Ai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*Артқа түймесі басылғанда, onBackPressed әдісі негізгі әрекетті бастау арқылы негізгі экранға өтеді.*/
 
     @Override
     public void onBackPressed() {

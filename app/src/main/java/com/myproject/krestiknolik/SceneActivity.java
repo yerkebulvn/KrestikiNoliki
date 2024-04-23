@@ -30,6 +30,8 @@ import java.util.TimerTask;
 
 public class SceneActivity extends AppCompatActivity {
 
+    /* ойын логикасын, ПАЙДАЛАНУШЫ ИНТЕРФЕЙСІНІҢ өзара әрекеттесуін және ойыншы қалауларын өңдейді.*/
+
     boolean easy = true;
     boolean medium;
     boolean hard;
@@ -38,6 +40,13 @@ public class SceneActivity extends AppCompatActivity {
     boolean player1ax;
     Random r = new Random();
 
+    /* Ойын параметрлері мен күйін басқару үшін әр түрлі логикалық және бүтін айнымалылар инициализацияланған.
+        трекер мен түймені басқан массивтер ойын тақтасының күйін бақылау үшін пайдаланылады.
+        Ойыншының аттары (player1 және player2) ниеттен алынады.*/
+
+    /* Player1ax жалаушасы 1 Ойыншының X немесе O түрінде ойнайтынын анықтайды.
+        Ax және zero айнымалылары сәйкесінше орнатылады.
+        Таңдалған жалғыз ойыншы жалаушасы бір ойыншы режимін көрсетеді.*/
     int flag = 0, ax = 10, zero = 1, win = 0, i, game = 1;
     int summ = 0, ctrflag = 0, resetchecker = 1, currentgamedonechecker = 0;
     int score1 = 0, score2 = 0, drawchecker = 0;
@@ -76,9 +85,9 @@ public class SceneActivity extends AppCompatActivity {
 
 
             }
-        }, 0, 2);//put here time 1000 milliseconds = 1 second
+        }, 0, 2);//мұнда уақытты 1000 миллисекунд = 1 секундқа қойыңыз
 
-        Window w = getWindow(); // in Activity's onCreate() for instance
+        Window w = getWindow();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
@@ -669,10 +678,10 @@ public class SceneActivity extends AppCompatActivity {
             if (sum[i] == 3 || sum[i] == 30) {
 
                 if(Vibration) {
-                    // Get instance of Vibrator from current Context
+                    // Ағымдағы Контекстен Vibrator данасын алыңыз
                     Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-// Vibrate for 400 milliseconds
+// 400 миллисекунд ішінде дірілдеу
                     v.vibrate(400);
                 }
                 win++;

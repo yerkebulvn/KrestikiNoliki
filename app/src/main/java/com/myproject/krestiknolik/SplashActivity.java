@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity { // Бұл SplashActivity экранынан MainActivity үздіксіз ауысуды қамтамасыз етеді.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,12 @@ public class SplashActivity extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        /* Мәтін Көріністерін Анимациялау:
+        TextView және textView2 анимацияланған, олар төменнен жоғары қарай сырғып, өшеді.
+        TranslationY сипаты мәтін көріністерін тігінен жылжытады.
+        Альфа қасиеті мөлдірлікті басқарады.
+        Анимациялар үшін кідірістер мен ұзақтықтар көрсетілген.*/
 
         TextView textView = findViewById(R.id.textView3);
         TextView textView2 = findViewById(R.id.textView2);
@@ -46,6 +52,12 @@ public class SplashActivity extends AppCompatActivity {
                 .translationY(textView.getHeight())
                 .alpha(1f)
                 .setDuration(800);
+
+        /* MainActivity өтіңіз:
+        4 секундтық кідірістен кейін (4000 миллисекунд) Шашырау Белсенділігі Негізгі Әрекетке ауысады.
+        FLAG_ACTIVITY_NO_ANIMATION жалаушасы анимациясыз тегіс өтуді қамтамасыз етеді.
+        Finish () әдісі шашырау әрекетінің артқы дестеден жойылуын қамтамасыз етеді.*/
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
