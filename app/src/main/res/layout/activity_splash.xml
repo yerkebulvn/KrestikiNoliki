@@ -7,11 +7,13 @@
     android:background="#F5F7F6"
     tools:context=".SettingsActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:gravity="center"
         android:background="#F5F7F6">
 
         <ImageView
@@ -24,9 +26,9 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView3"
-            android:layout_centerHorizontal="true"
-            android:text="Tic Tac Toe"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:fontFamily="@font/advent_pro_bold"
             android:textColor="@android:color/black"
             android:textSize="42sp" />
 
@@ -34,11 +36,9 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
-            android:layout_centerHorizontal="true"
-            android:text="version 1.0"
+            android:text="@string/app_version"
             android:textSize="18sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

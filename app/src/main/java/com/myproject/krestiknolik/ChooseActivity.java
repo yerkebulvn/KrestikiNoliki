@@ -12,14 +12,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,7 +20,6 @@ public class ChooseActivity extends AppCompatActivity {
     CharSequence player1 = "Player 1";
     CharSequence player2 = "Player 2";
     public boolean selectedsingleplayer;
-    private AdView mAdView;
 
     boolean player1ax, isSelected, isFirstChoose;
 
@@ -46,56 +37,6 @@ public class ChooseActivity extends AppCompatActivity {
 
         final SharedPreferences sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
 
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId(getString(R.string.banner_ad));
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        mAdView = findViewById(R.id.adView2);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
-
-
         CharSequence[] players = getIntent().getCharSequenceArrayExtra("playersnames");
         player1 = players[0];
         player2 = players[1];
@@ -104,9 +45,9 @@ public class ChooseActivity extends AppCompatActivity {
 
         selectedsingleplayer = getIntent().getBooleanExtra("selectedsingleplayer", true);
         if (!selectedsingleplayer) {
-            label.setText(player1 + " pick your side");
+            label.setText(player1 + getApplicationContext().getResources().getString(R.string.pick_your_side));
         } else {
-            label.setText("Pick your side");
+            label.setText(getApplicationContext().getResources().getString(R.string.pick_your_side));
         }
 
         oImage = findViewById(R.id.o_image);
@@ -259,9 +200,9 @@ public class ChooseActivity extends AppCompatActivity {
         this.shape = "";
 
         if (!selectedsingleplayer) {
-            label.setText(player2 + " pick your side");
+            label.setText(player2 + getApplicationContext().getResources().getString(R.string.get_your_side));
         } else {
-            label.setText("Pick AI side");
+            label.setText(getApplicationContext().getResources().getString(R.string.get_ai_side));
         }
 
         oImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.transparent));

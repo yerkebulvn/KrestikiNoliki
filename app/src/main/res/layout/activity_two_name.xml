@@ -25,9 +25,10 @@
         android:layout_above="@+id/center"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:text="Enter your Name"
+        android:text="@string/enter_your_names"
         android:textColor="#DC000000"
-        android:textSize="20sp" />
+        android:fontFamily="@font/advent_pro_bold"
+        android:textSize="22sp" />
 
     <LinearLayout
         android:id="@+id/center"
@@ -42,10 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="6"
-            android:hint="First player"
+            android:hint="@string/first_player"
             android:inputType="textPersonName|textCapWords"
             android:singleLine="true"
             android:textColor="#3b7df8"
+            android:textSize="22sp"
+            android:fontFamily="@font/advent_pro_regular"
             android:paddingVertical="8dp"
             android:paddingHorizontal="16dp"
             android:textColorHint="#6A575757"
@@ -59,7 +62,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/backwhite"
             android:maxLength="6"
-            android:hint="Second player"
+            android:fontFamily="@font/advent_pro_regular"
+            android:textSize="20sp"
+            android:hint="@string/second_player"
             android:inputType="textPersonName|textCapWords"
             android:singleLine="true"
             android:textColor="#3b7df8"
@@ -77,9 +82,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp"
+        android:textSize="18sp"
         android:background="@drawable/backwhite"
-        android:fontFamily="sans-serif-light"
-        android:text="Continue" />
+        android:fontFamily="@font/advent_pro_regular"
+        android:text="@string/btn_continue" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -89,14 +95,5 @@
         android:layout_alignParentBottom="true"
         app:srcCompat="@drawable/fourth"
         android:scaleType="fitEnd"/>
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
 
 </RelativeLayout>

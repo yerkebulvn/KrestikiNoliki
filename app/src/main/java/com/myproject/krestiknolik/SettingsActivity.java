@@ -1,11 +1,11 @@
 package com.myproject.krestiknolik;
 
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -23,15 +23,11 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String EXTRA_CIRCULAR_REVEAL_X = "EXTRA_CIRCULAR_REVEAL_X";
 
     public static final String EXTRA_CIRCULAR_REVEAL_Y = "EXTRA_CIRCULAR_REVEAL_Y";
-    View rootLayout;
 
-    private int revealX;
     private static final String PREFS_NAME = "vibration";
     private static final String PREF_VIBRATION = "TicVib";
-    private int revealY;
     private boolean Vibration;
     private boolean isChecked;
-    private String[] Randomfirst;
     private SharedPreferences sharedPreferences;
     private TextView dif;
 
@@ -79,22 +75,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        RelativeLayout r6 = findViewById(R.id.r6);
-        r6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rating();
-            }
-        });
-
-        RelativeLayout r7 = findViewById(R.id.r7);
-        r7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                feedbacks();
-            }
-        });
-
         ImageView back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,15 +108,15 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("Difficulty")
-                .setPositiveButton("Great!", new DialogInterface.OnClickListener() {
+                .setTitle(getApplicationContext().getResources().getString(R.string.st_difficulty))
+                .setPositiveButton(getApplicationContext().getResources().getString(R.string.mes_great), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dif.setText(getDiffLabel(sharedPreferences.getInt("key", 0)));
                         dialog.dismiss();
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getApplicationContext().getResources().getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -171,33 +151,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }
-
-    private void rating() {
-        Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        // To count with Play market backstack, After pressing back button,
-        // to taken back to our application, we need to add following flags to intent.
-        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        try {
-            startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
-        }
-    }
-
-    private void feedbacks() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        String[] recipients = {getString(R.string.feedback)};
-        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Tic Tac Toe Feedbacks");
-        intent.putExtra(Intent.EXTRA_CC, getString(R.string.feedback));
-        intent.setType("text/html");
-        intent.setPackage("com.google.android.gm");
-        startActivity(Intent.createChooser(intent, "Send mail"));
     }
 
     private String getDiffLabel(int level) {

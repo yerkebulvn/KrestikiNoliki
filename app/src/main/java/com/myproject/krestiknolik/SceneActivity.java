@@ -24,15 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,14 +35,11 @@ public class SceneActivity extends AppCompatActivity {
     boolean hard;
     boolean impossible;
 
-    boolean wins;
-    boolean returns;
-
     boolean player1ax;
     Random r = new Random();
 
-    int flag = 0, ax = 10, zero = 1, sensorflag = 0, win = 0, i, game = 1, prevrow, prevcol;
-    int summ = 0, ctrflag = 0, night = 0, resetchecker = 1, currentgamedonechecker = 0;
+    int flag = 0, ax = 10, zero = 1, win = 0, i, game = 1;
+    int summ = 0, ctrflag = 0, resetchecker = 1, currentgamedonechecker = 0;
     int score1 = 0, score2 = 0, drawchecker = 0;
     static int[][] tracker = new int[3][3];
     int[] sum = new int[8];
@@ -62,11 +50,9 @@ public class SceneActivity extends AppCompatActivity {
     CharSequence player2 = "Player 2";
     private   boolean Vibration ;
     private static final String PREFS_NAME = "vibration";
-    private AdView mAdView;
 
     private static final String PREF_VIBRATION = "TicVib";
     private SharedPreferences sharedPreferences;
-    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,55 +60,6 @@ public class SceneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scene);
 
         sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
-
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId(getString(R.string.banner_ad));
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        mAdView = findViewById(R.id.adView4);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -182,32 +119,12 @@ public class SceneActivity extends AppCompatActivity {
 
         if (!selectedsingleplayer){
             textName2.setText(player2);
-            Toast.makeText(this, "" + player1 + "\'s turn", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + player1 + getApplicationContext().getResources().getString(R.string.pl_turn), Toast.LENGTH_SHORT).show();
         }
 
-        loadInterstitialAd();
-
-    }
-
-    private void loadInterstitialAd() {
-        interstitialAd = new InterstitialAd(getApplicationContext());
-        interstitialAd.setAdUnitId(getString(R.string.interstitial_ad));
-        interstitialAd.setAdListener(new AdListener(){
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                Intent intent = new Intent(SceneActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitialAd.loadAd(adRequest);
     }
 
     public void kzz(View view) {
-
 
         if (win == 0 && buttonpressed[0][0] == 0) {
             if (flag % 2 == 0)
@@ -728,40 +645,6 @@ public class SceneActivity extends AppCompatActivity {
         return image;
     }
 
-   /* public void showDialog(String whoWon, String scoreWon, String whoLose, String scoreLose) {
-
-        final Dialog dialog = new Dialog(SceneActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_layout);
-//      TextView playerOneScore = dialog.findViewById(R.id.player_one_score);
-//        TextView playerTwoScore = dialog.findViewById(R.id.player_two_score);
-        TextView titleText = dialog.findViewById(R.id.title_text);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        titleText.setText(whoWon);
-//        playerOneScore.setText(whoWon+" Score -> "+scoreWon);
-//        playerTwoScore.setText(whoLose+"Score -> "+scoreLose);
-
-        Button resetButton = dialog.findViewById(R.id.reset_button);
-        Button playAgainButton = dialog.findViewById(R.id.play_again_button);
-
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                doreset();
-            }
-        });
-
-        playAgainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                playmore();
-            }
-        });
-    }*/
 
     public void winchecker() {
         ctrflag++;
@@ -818,8 +701,6 @@ public class SceneActivity extends AppCompatActivity {
 
 
                     q1.setText("" + score1);
-                   // showDialog("" + player1 + " won!", "" + score1, "" + player2, "" + score2);
-                 //   Toast.makeText(getApplicationContext(),player1 + " won!", Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
@@ -854,8 +735,6 @@ public class SceneActivity extends AppCompatActivity {
 
 
                     q1.setText("" + score2);
-                   // showDialog("" + player2 + " won!", "" + score2, "" + player1, "" + score1);
-                  //  Toast.makeText(getApplicationContext(),"AI won!", Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
@@ -891,8 +770,6 @@ public class SceneActivity extends AppCompatActivity {
 
 
                     q1.setText("" + score1);
-                //    showDialog("" + player1 + " won!", "" + score1, "" + player2, "" + score2);
-                  //  Toast.makeText(getApplicationContext(),player1 + " won!", Toast.LENGTH_SHORT).show();
 
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
@@ -928,24 +805,18 @@ public class SceneActivity extends AppCompatActivity {
 
 
                     q1.setText("" + score2);
-                    // to asi netreba
-                     //   Toast.makeText(getApplicationContext(), " AI won!", Toast.LENGTH_SHORT).show();
+
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             playmore();
                         }
                     }, 500);
 
-
-                  //  showDialog("" + player2 + " won!", "" + score2, "" + player1, "" + score1);
-
                 }
 
             }
 
         if ((ctrflag == 9) && (win == 0)) {
-         //  showDialog("This is a draw !", "" + score1, "" + "AI", "" + score2);
-
 
             Toast.makeText(getApplicationContext(),"DRAW!",Toast.LENGTH_SHORT).show();
 
@@ -1027,8 +898,6 @@ public class SceneActivity extends AppCompatActivity {
 
         if ((drawchecker > 0) || (win > 0)) {
             game++;
-        //    TextView qq = (TextView) findViewById(R.id.gamenumber);
-          //  qq.setText("" + game);
 
             for (int i = 0; i < 8; i++)
                 sum[i] = 0;
@@ -1064,12 +933,10 @@ public class SceneActivity extends AppCompatActivity {
                 for (int j = 0; j < 3; j++)
                     tracker[i][j] = 0;
 
-//ToTo som ja dal prec
-
             if (!selectedsingleplayer) {
                 if ((game + 1) % 2 == 0) {
-                    Toast.makeText(this, "" + player1 + "\'s turn", Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(this, "" + player2 + "\'s turn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "" + player1 + getApplicationContext().getResources().getString(R.string.pl_turn), Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(this, "" + player2 + getApplicationContext().getResources().getString(R.string.pl_turn), Toast.LENGTH_SHORT).show();
             }
 
             win = 0;
@@ -1085,10 +952,6 @@ public class SceneActivity extends AppCompatActivity {
 
 
     public void doreset() {
-
-      //  TextView qq = (TextView) findViewById(R.id.gamenumber);
-       // qq.setText("" + 1);
-
 
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
@@ -1135,18 +998,10 @@ public class SceneActivity extends AppCompatActivity {
         TextView qqqq = (TextView) findViewById(R.id.p2score);
         qqqq.setText("" + score2);
 
-        Toast.makeText(this, "" + player1 + "\'s turn", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + player1 + getApplicationContext().getResources().getString(R.string.pl_turn), Toast.LENGTH_SHORT).show();
 
 
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
 
     private void showExitDialog() {
         final Dialog dialog = new Dialog(SceneActivity.this);
@@ -1169,13 +1024,10 @@ public class SceneActivity extends AppCompatActivity {
                 editor.clear();
                 editor.apply();
 
-                if (interstitialAd.isLoaded()) {
-                    interstitialAd.show();
-                } else {
-                    Intent intent = new Intent(SceneActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                Intent intent = new Intent(SceneActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
 
@@ -1210,37 +1062,4 @@ public class SceneActivity extends AppCompatActivity {
         showExitDialog();
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.exit) {
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.putExtra("EXIT", true);
-//            doreset();
-//            startActivity(intent);
-//        }
-//
-//        if (id == R.id.daynightmode) {
-//
-//            if (night % 2 == 0) {
-//                View view = this.getWindow().getDecorView();
-//                view.setBackgroundColor(Color.parseColor("#000000"));
-//                item.setTitle("Day Mode");
-//            } else {
-//                View view = this.getWindow().getDecorView();
-//                view.setBackgroundColor(Color.parseColor("#FFFFFF"));
-//                item.setTitle("Night Mode");
-//            }
-//            night++;
-//        }
-//
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

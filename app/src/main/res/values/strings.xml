@@ -1,15 +1,41 @@
 <resources>
 
-    <string name="app_name">Tic Tac Toe</string>
+    <string name="app_name">Кресттер мен нольдер</string>
 
 
-    <string name="player1nameHint">player1 name</string>
-    <string name="player2nameHint">player2 name</string>
-    <string name="action_settings">Settings</string>
-    <string name="exit">Exit</string>
-    <string name="title_activity_afterstart">Tic Tac Toe</string>
-    <string name="banner_ad">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_ad">ca-app-pub-9585793574038766/1459410039</string>
-    <string name="feedback">freecodeofficial@gmail.com</string>
+    <string name="player1nameHint">1 ойыншының аты</string>
+    <string name="player2nameHint">2 ойыншының аты</string>
+    <string name="action_settings">Параметрлер</string>
+    <string name="exit">Шығу</string>
+    <string name="title_activity_afterstart">Кресттер мен нольдер</string>
+
+    <string name="pick_your_side">Қай жақты таңдайсың?</string>
+    <string name="btn_continue">Жалғастыру</string>
+    <string name="play_with_ai">ЖИ қарсы ойнау</string>
+    <string name="play_ai_description">Роботпен ойнаңыз, параметрлерде ойын қиындығын таңдауға болады</string>
+    <string name="play_with_friends">Достарыңмен ойнау</string>
+    <string name="play_friends_description">Достарыңызбен көңіл көтеріңіз, сіз әртүрлі пішіндердің бірін таңдай аласыз</string>
+    <string name="settings_btn">Параметрлер</string>
+    <string name="enter_your_name">Атыңды жаз</string>
+    <string name="hint_nickname">Никнейм</string>
+    <string name="st_difficulty">Қиындық</string>
+    <string name="dif_easy">Оңай</string>
+    <string name="st_vibration">Вибрация</string>
+    <string name="app_version">версия 1.0</string>
+    <string name="enter_your_names">Аттарыңызды енгізіңіздер</string>
+    <string name="first_player">Бірінші ойыншы</string>
+    <string name="second_player">Екінші ойыншы</string>
+    <string name="hello">Сәлем</string>
+    <string name="reset">ҚАЛПЫНА КЕЛТІРУ</string>
+    <string name="play_again">ҚАЙТА ОЙНАУ</string>
+    <string name="want_exit">Сіз шыққыңыз келе ме?</string>
+    <string name="btn_no">ЖОҚ</string>
+    <string name="btn_yes">ИЯ</string>
+    <string name="mes_great">Керемет!</string>
+    <string name="get_your_side">" өз жағыңды таңда"</string>
+    <string name="get_ai_side">ЖИ командасын таңда</string>
+    <string name="pl_turn">" кезегі"</string>
+    <string name="ai_name">ЖИ</string>
+    <string name="dialog_cancel">БОЛДЫРМАУ</string>
 
 </resources>
